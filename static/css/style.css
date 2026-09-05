@@ -89,7 +89,7 @@ h1, .brand {
     /* max-height: 70vh; */
     grid-area: main;
     display: grid;
-    grid-template-columns: 400px 1fr;
+    grid-template-columns: 500px 1fr;
     grid-template-areas: "photo texts";
     z-index: 1;
 
@@ -198,13 +198,18 @@ h1, .brand {
     background-color: var(--accent2);
 }
 
-@media (max-width: 800px) {
+@media (max-width: 600px) {
+    .body {
+        min-height: 100vh;
+    }
     .profile {
         grid-template-columns: 1fr;
         grid-template-areas:
             "photo"
             "texts";
     }
+
+
     .profile-information {
         padding-top: 8%;
         margin-right: 0;
@@ -237,5 +242,18 @@ h1, .brand {
 
     .profile-information {
         max-height: 90vh;
+        min-height: 50vh;
+    }
+
+    .site-footer {
+        position: static;
+        bottom: 0;
+    }
+
+    .profile .profile-leftside-image .photo-block {
+        left: 0;
+        height: 98%;
+        border-radius:0 0 0 0;
+        z-index: -1;
     }
 }
