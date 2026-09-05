@@ -5,24 +5,30 @@
 }
 
 :root {
-    --ink: #1c1917;
-    --paper: #eaf5ee;
-    --accent: #8bbf5d;
-    --accent-dark: #829a72;
+    --ink: #253137;
+    --paper: #fbf6e5;
+    --accent: #F5B942;
+    --accent-dark: #D9363E;
+    --accent2: #20a7a3;
     --line: #e3d9c9;
     --text-muted: #6b6459;
-    --radius: 4px;
+    --main-serif-font: "Bodoni Moda";
+    --main-standard-font: Geneva;
 }
 
 body {
-    font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    min-height: 400px;
+    display: grid;
+    grid-template-rows: auto 1fr auto ;
+    grid-template-areas: "header" "main" "footer";
+    font-family: var(--main-standard-font), serif;
     color: var(--ink);
     background-color: var(--paper);
     line-height: 1.6;
 }
 
 h1, .brand {
-    font-family: "Space Grotesk", -apple-system, sans-serif;
+    font-family: var(--main-serif-font), var(--main-standard-font), serif;
 }
 
 .container {
@@ -32,7 +38,21 @@ h1, .brand {
 }
 
 .site-header {
+    position: relative;
     border-bottom: 1px solid var(--line);
+    grid-area: header;
+    z-index: 1;
+}
+
+.site-header::after {
+    content: "";
+    position: absolute;
+    z-index: -2;
+    bottom: -10px;
+    left: 0;
+    width: 100%;
+    height: 10px;
+    background-color: var(--accent-dark);
 }
 
 .site-header .container {
@@ -43,7 +63,7 @@ h1, .brand {
 }
 
 .brand {
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     font-weight: 700;
     color: var(--ink);
     text-decoration: none;
@@ -57,139 +77,165 @@ h1, .brand {
 .site-header nav a {
     color: var(--ink);
     text-decoration: none;
+    transition: 0.2s;
     font-size: 0.95rem;
 }
 
-.hero {
-    padding: 4.5rem 0 5rem;
+.site-header nav a:hover {
+    color:var(--accent2);
 }
 
-.hero-grid {
+.profile {
+    /* max-height: 70vh; */
+    grid-area: main;
     display: grid;
-    grid-template-columns: 1.3fr 1fr;
-    grid-template-areas:
-        "identity photo"
-        "details  photo";
-    gap: 1.5rem 3rem;
+    grid-template-columns: 400px 1fr;
+    grid-template-areas: "photo texts";
+    z-index: 1;
+
+}
+.profile .profile-leftside-image {
+    grid-area: photo;
+    min-width: 80%;
+    align-self: center;
+    position: relative;
 }
 
-.hero-identity {
-    grid-area: identity;
+.profile .avatar {
+    display: block;
+    max-width: 100%;
+    border-radius: 0 50% 0 0;
+    height: auto;
 }
 
-.hero-details {
-    grid-area: details;
+.profile .profile-leftside-image .photo-block{
+    position: absolute;
+    bottom: 0;
+    left: 2rem;
+    width: 100%;
+    height: 95%;
+    background-color: var(--accent);
+    border-radius:0 50% 0 0;
+    z-index: -1;
 }
 
-.hero-kicker {
-    font-size: 0.85rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--accent-dark);
-    font-weight: 700;
-    margin-bottom: 0.75rem;
-}
-
-.hero-identity h1 {
-    font-size: clamp(3rem, 7vw, 5rem);
-    line-height: 0.95;
-}
-
-.bio {
-    color: var(--text-muted);
-    max-width: 480px;
-    margin-bottom: 1.5rem;
-}
-
-.meta-list {
+.container-button {
+    align-self: baseline;
+    margin-top: 1rem;
     display: flex;
-    gap: 2rem;
-    margin-bottom: 1.5rem;
-}
-
-.meta-row dt {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--text-muted);
-    margin-bottom: 0.15rem;
-}
-
-.meta-row dd {
-    font-weight: 600;
-}
-
-.social-links {
-    display: flex;
-    gap: 0.5rem;
+    gap: 1rem;
     flex-wrap: wrap;
+    justify-content: right;
 }
 
 .social-link {
-    display: inline-block;
+    margin-bottom: 20px;
+    display:inline-block;
     font-size: 0.85rem;
     font-weight: 600;
     text-decoration: none;
     color: var(--paper);
     background-color: var(--ink);
-    border-radius: var(--radius);
+    border-radius: 4px;
     padding: 0.5rem 1.1rem;
     transition: background-color 0.2s ease;
 }
 
 .social-link:hover {
-    background-color: var(--accent);
+    background-color: var(--accent2);
 }
 
-.hero-photo {
-    grid-area: photo;
-    align-self: center;
-    position: relative;
+.profile-information {
+    padding-top: 3rem;
+    padding-left: 2rem;
+    padding-right: 5%;
+    margin-right: 20%;
+    display:grid;
+    grid-template-rows: 3fr 1fr 1fr;
+    gap: 10px;
+    
 }
 
-.photo-block {
-    position: absolute;
-    top: 1.25rem;
-    left: 1.25rem;
-    width: 100%;
-    height: 100%;
-    background-color: var(--accent);
-    border-radius: var(--radius);
-    z-index: 0;
+.study-info {
+    align-self:center ;
+    justify-self: end;
+    display: flex;
+    gap: 30px;
 }
 
-.avatar {
-    position: relative;
-    z-index: 1;
-    display: block;
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
-    border-radius: var(--radius);
-    border: 3px solid var(--ink);
+.study-info h4 {
+    text-align: center;
+    color: var(--accent-dark);
+    font-weight: 600;
+}
+
+.identity .text-accented {
+    min-width:100%;
+    color: var(--accent-dark);
+    font-weight: 600;
+    text-align: end;
+}
+
+.identity .text-normal {
+    max-width: 70%;
+    justify-self: end;
+    font-weight: 300;
+    text-align: end;
+}
+
+.identity h1 {
+    justify-self: right;
+    text-align: end;
+    font-size: 60px;
+    line-height: 120%;
 }
 
 .site-footer {
+    grid-area: footer;
     padding: 1.5rem;
-    color: var(--text-muted);
+    color: var(--paper);
     font-size: 0.85rem;
-    border-top: 1px solid var(--line);
+    background-color: var(--accent2);
 }
 
-@media (max-width: 600px) {
-    .hero-grid {
+@media (max-width: 800px) {
+    .profile {
         grid-template-columns: 1fr;
         grid-template-areas:
-            "identity"
             "photo"
-            "details";
+            "texts";
+    }
+    .profile-information {
+        padding-top: 8%;
+        margin-right: 0;
+        justify-content: left;
     }
 
-    .hero-photo {
-        max-width: 220px;
+    .identity h1{
+        justify-self: left;
+        text-align: start;
+   }
+
+    .identity .text-accented {
+        justify-self: left;
+        text-align: start;
     }
 
-    .social-links {
-        justify-content: flex-start;
+    .identity .text-normal {
+        justify-self: left;
+        text-align: start;
+    }
+
+    .container-button {
+        justify-self: left;
+        margin-top: 0;
+    }
+
+    .study-info {
+        justify-self: left;
+    }
+
+    .profile-information {
+        max-height: 90vh;
     }
 }

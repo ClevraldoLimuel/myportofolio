@@ -7,46 +7,47 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
     <header class="site-header">
         <div class="container">
-            <a href="#profile" class="brand">Clevr</a>
+            <a href="../" class="brand">Clevr</a>
             <nav>
                 <a href="#profile">Profile</a>
+                <a href="interest/">Interests</a>
             </nav>
         </div>
     </header>
 
-    <main>
-        <section class="hero" id="profile">
-            <div class="container hero-grid">
-                <div class="hero-identity">
-                    <p class="hero-kicker">Computer Science &middot; Universitas Indonesia</p>
-                    <h1>Clevraldo Limuel</h1>
+    <main class="profile">
+        <section class="profile-leftside-image">
+            <div class="photo-block"></div>
+            <img class="avatar" src="/static/img/myPic.jpg" alt="Photo of Clevr">
+        </section>
+
+        <section class="profile-main">
+            <div class="profile-information">
+                <div class="identity">
+                    <p class="text-accented">Computer Science &middot; Universitas Indonesia</p>
+                    <h1 class="text-main">Clevraldo Limuel</h1>
+                    <p class="text-normal">CS student at Universitas Indonesia. Aiming to be a better person. Currently learning much</p>
                 </div>
-                <div class="hero-photo">
-                    <div class="photo-block"></div>
-                    <img class="avatar" src="/static/img/itsMe.jpg" alt="Photo of Clevr">
-                </div>
-                <div class="hero-details">
-                    <p class="bio">CS student at Universitas Indonesia. Aiming to be a better person.</p>
-                    <dl class="meta-list">
-                        <div class="meta-row">
-                            <dt>NPM</dt>
-                            <dd>2506656583</dd>
-                        </div>
-                        <div class="meta-row">
-                            <dt>Program</dt>
-                            <dd>S1 Ilmu Komputer</dd>
-                        </div>
-                    </dl>
-                    <div class="social-links">
-                        <a href="https://github.com/ClevraldoLimuel" class="social-link">GitHub</a>
-                        <a href="https://id.linkedin.com/in/clevraldo-limuel-87b20437b" class="social-link">LinkedIn</a>
-                        <a href="mailto:aldolimuell@gmail.com" class="social-link">Email</a>
+                <div class="study-info"> 
+                    <div> 
+                        <h4>NPM</h4>
+                        <p>2506656583</p>
                     </div>
+                    <div> 
+                        <h4>Program</h4>
+                        <p>Ilmu Komputer</p>
+                    </div>
+                </div>
+                <div class="container-button">
+                    <a href="https://github.com/ClevraldoLimuel" class="social-link">GitHub</a>
+                    <a href="https://id.linkedin.com/in/clevraldo-limuel-87b20437b" class="social-link">LinkedIn</a>
+                    <a href="mailto:aldolimuell@gmail.com" class="social-link">Email</a>
                 </div>
             </div>
         </section>
@@ -58,4 +59,5 @@
         </div>
     </footer>
 </body>
+
 </html>
