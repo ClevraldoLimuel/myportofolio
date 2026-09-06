@@ -12,7 +12,7 @@
     --accent2: #20a7a3;
     --line: #e3d9c9;
     --text-muted: #6b6459;
-    --main-serif-font: "Bodoni Moda";
+    --main-serif-font: "Aboreto";
     --main-standard-font: Geneva;
 }
 
@@ -48,10 +48,10 @@ h1, .brand {
     content: "";
     position: absolute;
     z-index: -2;
-    bottom: -10px;
+    bottom: -46px;
     left: 0;
     width: 100%;
-    height: 10px;
+    height: 45px;
     background-color: var(--accent-dark);
 }
 
@@ -64,7 +64,7 @@ h1, .brand {
 
 .brand {
     font-size: 1.5rem;
-    font-weight: 700;
+    font-weight: 900;
     color: var(--ink);
     text-decoration: none;
 }
@@ -85,111 +85,6 @@ h1, .brand {
     color:var(--accent2);
 }
 
-.profile {
-    /* max-height: 70vh; */
-    grid-area: main;
-    display: grid;
-    grid-template-columns: 500px 1fr;
-    grid-template-areas: "photo texts";
-    z-index: 1;
-
-}
-.profile .profile-leftside-image {
-    grid-area: photo;
-    min-width: 80%;
-    align-self: center;
-    position: relative;
-}
-
-.profile .avatar {
-    display: block;
-    max-width: 100%;
-    border-radius: 0 50% 0 0;
-    height: auto;
-}
-
-.profile .profile-leftside-image .photo-block{
-    position: absolute;
-    bottom: 0;
-    left: 2rem;
-    width: 100%;
-    height: 95%;
-    background-color: var(--accent);
-    border-radius:0 50% 0 0;
-    z-index: -1;
-}
-
-.container-button {
-    align-self: baseline;
-    margin-top: 1rem;
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-    justify-content: right;
-}
-
-.social-link {
-    margin-bottom: 20px;
-    display:inline-block;
-    font-size: 0.85rem;
-    font-weight: 600;
-    text-decoration: none;
-    color: var(--paper);
-    background-color: var(--ink);
-    border-radius: 4px;
-    padding: 0.5rem 1.1rem;
-    transition: background-color 0.2s ease;
-}
-
-.social-link:hover {
-    background-color: var(--accent2);
-}
-
-.profile-information {
-    padding-top: 3rem;
-    padding-left: 2rem;
-    padding-right: 5%;
-    margin-right: 20%;
-    display:grid;
-    grid-template-rows: 3fr 1fr 1fr;
-    gap: 10px;
-    
-}
-
-.study-info {
-    align-self:center ;
-    justify-self: end;
-    display: flex;
-    gap: 30px;
-}
-
-.study-info h4 {
-    text-align: center;
-    color: var(--accent-dark);
-    font-weight: 600;
-}
-
-.identity .text-accented {
-    min-width:100%;
-    color: var(--accent-dark);
-    font-weight: 600;
-    text-align: end;
-}
-
-.identity .text-normal {
-    max-width: 70%;
-    justify-self: end;
-    font-weight: 300;
-    text-align: end;
-}
-
-.identity h1 {
-    justify-self: right;
-    text-align: end;
-    font-size: 60px;
-    line-height: 120%;
-}
-
 .site-footer {
     grid-area: footer;
     padding: 1.5rem;
@@ -198,62 +93,13 @@ h1, .brand {
     background-color: var(--accent2);
 }
 
-@media (max-width: 600px) {
+@media (max-width: 900px) {
     .body {
         min-height: 100vh;
     }
-    .profile {
-        grid-template-columns: 1fr;
-        grid-template-areas:
-            "photo"
-            "texts";
-    }
-
-
-    .profile-information {
-        padding-top: 8%;
-        margin-right: 0;
-        justify-content: left;
-    }
-
-    .identity h1{
-        justify-self: left;
-        text-align: start;
-   }
-
-    .identity .text-accented {
-        justify-self: left;
-        text-align: start;
-    }
-
-    .identity .text-normal {
-        justify-self: left;
-        text-align: start;
-    }
-
-    .container-button {
-        justify-self: left;
-        margin-top: 0;
-    }
-
-    .study-info {
-        justify-self: left;
-    }
-
-    .profile-information {
-        max-height: 90vh;
-        min-height: 50vh;
-    }
-
+    
     .site-footer {
         position: static;
         bottom: 0;
-    }
-
-    .profile .profile-leftside-image .photo-block {
-        left: 0;
-        height: 98%;
-        border-radius:0 0 0 0;
-        z-index: -1;
     }
 }
