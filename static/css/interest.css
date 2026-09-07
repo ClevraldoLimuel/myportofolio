@@ -13,10 +13,17 @@
 .interest .interest-intro {
     display: grid;
     grid-template-columns: 1fr 2fr;
+    align-content: center;
     gap: 70px;
     padding-left: 2rem;
 }
 
+.interest-intro p {
+    min-width: 40vw;
+}
+.interest-intro h1 {
+    max-height: 1em;
+}
 .interest-content {
     align-self: center;
     justify-self: center;
@@ -86,4 +93,23 @@
     border-radius: 4px;
     padding: 3px 5px;
     margin-bottom: 1rem;
+}
+
+@media (max-width: 600px) {
+    .interest-intro {
+        grid-template-rows: 1fr auto;
+    }
+
+    .interest-intro h1 {
+        grid-row: 1;
+    }
+
+    .interest-intro p {
+        grid-row: 2 ;
+    }
+
+    .interest-content {
+        grid-template-columns: 1fr;
+        
+    }
 }

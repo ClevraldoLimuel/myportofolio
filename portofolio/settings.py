@@ -88,6 +88,7 @@ WSGI_APPLICATION = 'portofolio.wsgi.application'
 # https://docs.djangoproject.com/en/6.1/ref/settings/#databases
 
 # Database configuration
+PRODUCTION = False
 if PRODUCTION:
     DATABASES = {
         'default': {
