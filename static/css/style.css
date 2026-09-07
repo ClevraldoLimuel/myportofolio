@@ -16,6 +16,15 @@
     --main-standard-font: Geneva;
 }
 
+.text-normal {
+    font-weight: 300;
+}
+
+.text-main {
+    font-size: 60px;
+    line-height: 120%;
+}
+
 body {
     min-height: 400px;
     display: grid;
