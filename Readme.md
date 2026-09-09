@@ -61,35 +61,3 @@ Dengan mengubah grid-template-columns menjadi 1fr, CSS Grid secara otomatis akan
 2. Mengenai tata letak, saya menghadapi tantangan dalam mengatur ukuran dan alignment elemen photo pada halaman awal, sehingga elemen photo tetap bersinggungan dengan header dan footer sesuai dengan design yang saya inginkan. Sistem grid dan flexbox juga merupakan konsep yang bagi saya dibutuhkan pemahaman mendalam supaya dapat digunakan dengan optimal.
    
 3. Reaktivitas. Html memberikan struktur dan konten dan CSS memberikan style dan menyokong layout, tetapi keduanya tidak bisa memberikan respon kompleks terhadap input user. Mungkin pada iterasi proyek selanjutnya saya ingin memberikan fungsi tampilan informasi lebih lanjut yang disembunyikan secara default lalu ditampilkan dengan input klik tanpa meninggalkan halaman atau berpindah section. Saya juga ingin membuat counter berapa banyak user yang telah mengakses web ini.
-
-*Commits history during untracked pushes to pws (01/09/26 -> 07/09/26) (latest to oldest)*
-
-Date:   Mon Sep 7 12:54:06 2026 +0700
-
-    style:compatibilize interest page for thin window (mobile)
-
-Date:   Mon Sep 7 11:49:20 2026 +0700
-
-    feat:added interest page
-    
-Date:   Sun Sep 6 17:00:01 2026 +0700
-
-    style:change font for better readability
-    
-    refactor:splitting the css for each (currently) available page
-    
-Date:   Sat Sep 5 08:59:26 2026 +0700
-
-    fix:layout issue in mobile view
-
-Date:   Sat Sep 5 08:39:33 2026 +0700
-
-    style:reconfigure overall style
-
-Date:   Sat Sep 5 08:39:33 2026 +0700
-
-    style:reconfigure overall style
-
-Date:   Tue Sep 1 19:40:27 2026 +0700
-
-    Merge branch 'main' of https://github.com/ClevraldoLimuel/myportofolio
