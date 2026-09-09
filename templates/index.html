@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clevraldo Limuel - Portfolio</title>
+    <title>{{ name }} - Portfolio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Aboreto&display=swap" rel="stylesheet">
@@ -13,10 +13,11 @@
 <body>
     <header class="site-header">
         <div class="container">
-            <a href="../" class="brand">Clevr</a>
+            <a href="{% url 'main:show_main' %}" class="brand">{{ name }}</a>
             <nav>
-                <a href="#profile">Profile</a>
+                <a href="{% url 'main:show_main' %}">Profile</a>
                 <a href="interest/">Interests</a>
+                <a href="{% url 'main:show_experience' %}">Experience</a>
             </nav>
         </div>
     </header>
@@ -24,24 +25,24 @@
     <main class="profile">
         <section class="profile-leftside-image">
             <div class="photo-block"></div>
-            <img class="avatar" src="/static/img/myPic.jpg" alt="Photo of Clevr">
+            <img class="avatar" src="/static/img/myPic.jpg" alt="Photo of {{ name }}">
         </section>
 
         <section class="profile-main">
             <div class="profile-information">
                 <div class="identity">
                     <p class="text-accented">COMPUTER SCIENCE &middot; UNIVERSITAS INDONESIA</p>
-                    <h1 class="text-main">Clevraldo LimueL</h1>
-                    <p class="text-normal">CS student at Universitas Indonesia. Aiming to be a better person. Currently learning much</p>
+                    <h1 class="text-main">{{ name }}</h1>
+                    <p class="text-normal">{{ bio }}</p>
                 </div>
                 <div class="study-info"> 
                     <div> 
                         <h4>NPM</h4>
-                        <p>2506656583</p>
+                        <p>{{ npm }}</p>
                     </div>
                     <div> 
                         <h4>Program</h4>
-                        <p>Ilmu Komputer</p>
+                        <p>{{ study_program }}</p>
                     </div>
                 </div>
                 <div class="container-button">
@@ -55,7 +56,7 @@
 
     <footer class="site-footer">
         <div class="container">
-            <p>&copy; 2026 Clevr. Fakultas Ilmu Komputer, Universitas Indonesia.</p>
+            <p>&copy; 2026 {{ name }}. Fakultas Ilmu Komputer, Universitas Indonesia.</p>
         </div>
     </footer>
 </body>
