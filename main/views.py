@@ -1,11 +1,13 @@
 from django.shortcuts import render
 
 from main.models import Experience
+from main.models import Interest
 
 
 def show_main(request):
     context = {
         "name": "Clevraldo Limuel",
+        "name_short": "Clevr",
         "npm": "2506656583",
         "study_program": "S1 Ilmu Komputer",
         "bio": (
@@ -18,6 +20,17 @@ def show_main(request):
 def show_experience(request):
     context = {
         "name": "Clevraldo Limuel",
+        "name_short": "Clevr",
         "experience_list": Experience.objects.all(),
     }
     return render(request, "experience.html", context)
+
+def show_interest(request):
+    context = {
+        "name":"Clevraldo Limuel",
+        "name_short": "Clevr",
+        "technologies": Interest.objects.filter(category="technology"),
+        "creatives": Interest.objects.filter(category="creative"),
+        "leisures": Interest.objects.filter(category="leisure"),
+    }
+    return render(request, "interest.html", context)

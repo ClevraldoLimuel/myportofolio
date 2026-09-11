@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clevraldo Limuel - Portfolio</title>
+    <title>{{ name }} - Portfolio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Aboreto&display=swap" rel="stylesheet">
@@ -15,11 +15,12 @@
     <header class="site-header">
         <div class="container">
             <div class="main-tittle">
-                <a href="{% url 'main:show_main' %}" class="brand">{{ name }}</a>
+                <a href="{% url 'main:show_main' %}" class="brand">{{ name_short }}</a>
             </div>
             <nav>
-                <a href="../#profile">Profile</a>
-                <a href="">Interests</a>
+                <a href="{% url 'main:show_main' %}">Profile</a>
+                <a href="{% url 'main:show_interest' %}">Interests</a>
+                <a href="{% url 'main:show_experience' %}">Experience</a>
             </nav>
         </div>
     </header>
@@ -38,11 +39,11 @@
                     Building things with codes and understanding systems and softwares.
                 </p>
                 <div class="tags-container">
-                    <p class="tag">Web Development</p>
-                    <p class="tag">Game Development</p>
-                    <p class="tag">Algorithm</p>
-                    <p class="tag">OS</p>
-                    <p class="tag">Godot</p>
+                    {% for technology_tag in technologies %}
+                        <p class="tag">{{ technology_tag.name }}</p>
+                    {% empty %}
+                        <p class="tag">Its empty..</p>
+                    {% endfor %}
                 </div>
             </div>
             <div class="content-box" id="creative">
@@ -51,22 +52,22 @@
                     I like experimenting with visual design and finding ways to make technical projects feel distinctive and expressive.
                 </p>
                 <div class="tags-container">
-                    <p class="tag">Pixel Art</p>
-                    <p class="tag">UI</p>
-                    <p class="tag">Game Design</p>
-                    <p class="tag">Videography</p>
-                    <p class="tag">Photography</p>
+                    {% for creative_tag in creatives %}
+                        <p class="tag">{{ creative_tag.name }}</p>
+                    {% empty %}
+                        <p class="tag">Umm..</p>
+                    {% endfor %}
                 </div>
             </div>
             <div class="content-box" id="leisure">
                 <h4 class="text-sub4">LEISURE</h4>
                 <p class="text-normal">Things that i enjoy to do for fun</p>
                 <div class="tags-container">
-                    <p class="tag">Games</p>
-                    <p class="tag">4x</p>
-                    <p class="tag">Simulation</p>
-                    <p class="tag">Martial Arts</p>
-                    <p class="tag">Music</p>
+                    {% for leisure_tag in leisures %}
+                        <p class="tag">{{ leisure_tag.name }}</p>
+                    {% empty %}
+                        <p class="tag">Really?</p>    
+                    {% endfor %}
                 </div>
             </div>
         </section>
@@ -74,7 +75,7 @@
 
     <footer class="site-footer">
         <div class="container">
-            <p>&copy; 2026 Clevr. Fakultas Ilmu Komputer, Universitas Indonesia.</p>
+            <p>&copy; 2026 {{ name_short }}. Fakultas Ilmu Komputer, Universitas Indonesia.</p>
         </div>
     </footer>
 

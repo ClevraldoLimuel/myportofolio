@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.urls import reverse
 from django.utils import timezone
 
-from main.models import Experience
+from main.models import Experience, Interest
 
 
 class MainTest(TestCase):
@@ -11,6 +11,11 @@ class MainTest(TestCase):
             title="Asisten Dosen PBP",
             description="Membantu mahasiswa memahami pengembangan web.",
             category="part-time",
+        )
+        self.interest = Interest.objects.create(
+            name="Tempe Goreng",
+            description="Tempe Goreng yang keemasan bermandikan minyak sawit",
+            category="leisure",
         )
 
     def test_main_url_is_accessible(self):
@@ -56,3 +61,24 @@ class MainTest(TestCase):
         self.assertFalse(self.experience.is_ongoing)
         self.assertContains(response, "Selesai")
         self.assertNotContains(response, "Sedang berlangsung")
+        
+    def test_interest_model(self):
+        self.assertEqual(str(self.interest), "Tempe Goreng")
+        self.assertEqual(self.interest.name, "Tempe Goreng")
+        self.assertEqual(self.interest.category, "leisure")
+        self.assertEqual(self.interest.description, "Tempe Goreng yang keemasan bermandikan minyak sawit")
+        
+    def test_interest_page(self):
+        response = self.client.get(reverse("main:show_interest"))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "interest.html")
+        self.assertContains(response, self.interest.name)
+        self.assertContains(response, f'href="{reverse("main:show_main")}"')
+        
+    def test_empty_experience_page(self):
+        Interest.objects.all().delete()
+        response = self.client.get(reverse("main:show_interest"))
+
+        self.assertContains(response, "Umm..")
+        

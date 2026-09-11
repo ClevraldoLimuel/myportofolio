@@ -24,3 +24,19 @@ class Experience(models.Model):
     @property
     def is_ongoing(self):
         return self.ended_at is None
+    
+class Interest(models.Model):
+    INTEREST_CATEGORY = [
+        ('technology', 'Tech'),
+        ('creative', 'Creative'),
+        ('leisure', 'Leisure')
+    ]
+    
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    name = models.CharField(max_length=32)
+    description = models.TextField()
+    category = models.CharField(max_length=32, choices=INTEREST_CATEGORY)
+    
+    def __str__(self):
+        return self.name
+    
