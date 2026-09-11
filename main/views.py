@@ -1,7 +1,6 @@
 from django.shortcuts import render
 
-from main.models import Experience
-from main.models import Interest
+from main.models import Experience, Interest, Education
 
 
 def show_main(request):
@@ -34,3 +33,11 @@ def show_interest(request):
         "leisures": Interest.objects.filter(category="leisure"),
     }
     return render(request, "interest.html", context)
+
+def show_education(request):
+    context = {
+        "name":"Clevraldo Limuel",
+        "name_short": "Clevr",
+        "education_history": Education.objects.all().order_by('admission_year')
+    }
+    return render(request, "education.html", context)

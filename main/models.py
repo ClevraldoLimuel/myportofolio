@@ -40,3 +40,15 @@ class Interest(models.Model):
     def __str__(self):
         return self.name
     
+class Education(models.Model):
+    DEGREE_CHOICE = [('elementary', 'Sekolah Dasar'), ('middle', 'Sekolah Menengah Pertama'), ('high', 'Sekolah Menengah Atas'),
+                    ('bachelor', 'S1'), ('master', 'S2'), ('doctorate', 'S3')]
+    
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    school_name = models.CharField(max_length=255)
+    location = models.CharField(max_length=255)
+    degree = models.CharField(max_length=16, choices=DEGREE_CHOICE)
+    admission_year = models.PositiveSmallIntegerField()
+    ongoing = models.BooleanField(default=False)
+    def __str__(self):
+        return self.school_name
