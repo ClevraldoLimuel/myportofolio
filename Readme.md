@@ -61,3 +61,46 @@ Dengan mengubah grid-template-columns menjadi 1fr, CSS Grid secara otomatis akan
 2. Mengenai tata letak, saya menghadapi tantangan dalam mengatur ukuran dan alignment elemen photo pada halaman awal, sehingga elemen photo tetap bersinggungan dengan header dan footer sesuai dengan design yang saya inginkan. Sistem grid dan flexbox juga merupakan konsep yang bagi saya dibutuhkan pemahaman mendalam supaya dapat digunakan dengan optimal.
    
 3. Reaktivitas. Html memberikan struktur dan konten dan CSS memberikan style dan menyokong layout, tetapi keduanya tidak bisa memberikan respon kompleks terhadap input user. Mungkin pada iterasi proyek selanjutnya saya ingin memberikan fungsi tampilan informasi lebih lanjut yang disembunyikan secara default lalu ditampilkan dengan input klik tanpa meninggalkan halaman atau berpindah section. Saya juga ingin membuat counter berapa banyak user yang telah mengakses web ini.
+
+
+
+## WEEK 2
+
+### Progress:
+
+- Menambahkan Education Page dan Database yang berkaitan dengan MVT
+
+- Menggunakan url string builder untuk Interest pada NavBar
+
+- Menambahkan TestCases untuk menguji fungsionalitas aplikasi
+
+- Menerapkan MVT untuk semua halaman
+
+
+### Challenges:
+
+Tantangan yang saya hadapi pada minggu kedua ini antara lain menentukan sistem basis data yang diperlukan untuk halaman seperti Interest dan Education, memahami konfigurasi routing URL, dan menentukan layout data yang akan ditampilkan di halaman Education
+
+
+### AI Disclosure:
+
+Saya menggunakan AI (chatGPT dan Claude) sebagai alat bantu selama proses pengembangan portfolio website, terutama untuk memahami konsep HTML/CSS, mencari alternatif solusi ketika mengalami masalah layout, dan memeriksa kemungkinan penyebab error. Contoh:
+
+Q:
+Bagaimana caranya supaya ketika viewport di-squeeze secara vertikal, isi elemen tidak overlap?
+
+A:
+Overlap biasanya terjadi karena adanya elemen dengan posisi absolute maupun fixed, atau margin elemen tersebut bernilai negatif. Overlap juga bisa terjadi jika terdapat limitasi terhadap ukuran elemen seperti max-height.
+
+Q: 
+Tetapi tidak ada elemen dengan position absolute maupun fixed yang overlap. Oh ini karena adanya elemen dengan max-width yang menggunakan satuan vh, sehingga pada viewport pendek, max-height nya juga ikut pendek
+A: 
+Yep, benar sekali, dan ini memang salah satu jebakan vh: viewport pendek tidak selalu berarti viewport sempit, tapi vh memperlakukan keduanya seolah-olah ukuran yang sama-sama menentukan lebar.
+
+
+## TUGAS 2
+1. Alur yang terjadi yaitu: Request → urls → View → Model → View → Template → Response. User mengirim request ke server, yang kemudian memeriksa urls.py project. urls.py meng-reroute request ke urls.py pada app sesuai dengan list pada urlpatterns. urls.py pada app menentukan fungsi pada views mana yang akan dijalankan. Views memproses request, mengambil data pada models, dan mereturn render dari template yang dilengkapi dengan context (yaitu data-data) sebagai response yang akan ditampilkan di User.
+   
+2. Data yang disimpan di models adalah data yang dapat berubah, baik diedit, dihapus, maupun ditambah. Untuk halaman yang datanya dapat berubah-ubah seperti experience, education, dan interest, penggunaan models dapat memudahkan perubahan data, sedangkan halaman yang statis seperti main yang hanya berisi data sederhana tidak membutuhkan model (overkill). Penggunaan model memungkinkan pemeliharaan dan pengembangan aplikasi yang lebih stabil dan reaktif terhadap perubahan data dan jumlah data.
+   
+3. makemigrations membuat file yang berisi informasi rencana perubahan model database, sedangkan migrate menerapkan perubahan tersebut pada database. Perubahan yang memerlukan kedua perintah tersebut adalah perubahan yang melibatkan perubahan bentuk, jumlah atribut, karakteristik atribut, perubahan entitas, dan sebagainya, seperti menambah entitas baru (Education dan Interest). Penambahan data dan perubahan pada instance suatu entitas tidak memerlukan kedua perintah tersebut. Simpelnya, lakukan makemigrations dan migrate jika mengubah template data, tidak perlu jika mengubah instance data.
