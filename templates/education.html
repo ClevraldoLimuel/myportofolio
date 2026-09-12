@@ -24,12 +24,35 @@
     </header>
 
     <main>
+        <section class='education-section' id="education">
+            <div class='education-upper'>
+                <h1 class='text-main'>EDUCATION</h1>
+                <p class='text-normal'>My educations are one of the longest, most influential part of my life. Shaping me into who i am and what i aspire to become. From the early days in school until i am able to study computer science, each stage has given me new knowledge, challenges, and experiences to learn from.</p>
+            </div>
 
+            <div class='education-main'>
+                {% for education in education_history %}
+                    <article class='education-info'>
+                        <p class='text-normal' id="misc">YEAR OF ADMISSION</p>
+                        <h2 class='text-sub2'>{{ education.admission_year }}</h2>
+                        {% if education.ongoing %}
+                            <h4 class='text-sub4'>{{ education.get_degree_display }} &middot; Current</h4>
+                        {% else %}
+                            <h4 class='text-sub4'>{{ education.get_degree_display }}</h4>
+                        {% endif %}
+                        <p class='text-normal' id="name">{{ education.school_name }}</p>
+                        <p class='text-normal' id="location">{{ education.location }}</p>
+                    </article>
+                {% empty %}
+                    <h2 class='text-normal'>NO DATA</h2>
+                {% endfor %}
+            </div>
+        </section>
     </main>
 
     <footer class="site-footer">
         <div class="container">
-            <p>&copy; 2026 {{ name }}. Fakultas Ilmu Komputer, Universitas Indonesia.</p>
+            <p>&copy; 2026 {{ name_short }}. Fakultas Ilmu Komputer, Universitas Indonesia.</p>
         </div>
     </footer>
 </body>
