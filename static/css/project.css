@@ -1,0 +1,352 @@
+:root {
+    --card-padding: 1rem;
+}
+
+.project-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    margin-top: 70px;
+}
+
+.experience-section {
+    margin-bottom: 3rem;
+    margin-top: 70px;
+}
+.project-form {
+    width: min(100%, 745px);
+}
+
+.project-form h1,
+.experience-section > .container > h1 {
+    margin: 0 0 1.5rem;
+    font-family: var(--main-standard-font);
+    font-size: 2rem;
+    color: var(--ink);
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.45rem;
+    font-weight: 700;
+    color: var(--ink);
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0.7rem 0.8rem;
+    border: 1px solid var(--accent2);
+    border-radius: 3px;
+    background: var(--paper);
+    color: var(--ink);
+    font: inherit;
+}
+
+.form-group textarea {
+    min-height: 84px;
+    resize: vertical;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: 2px solid var(--accent2);
+    outline-offset: 1px;
+}
+
+.project-form > .button {
+    margin-top: 0.25rem;
+    border: 0;
+    padding: 0.7rem 1rem;
+    background: var(--accent-dark);
+    color: var(--paper);
+    font: inherit;
+    font-weight: 700;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.project-form .button:hover {
+    background: var(--accent2);
+    transform: scale(1.03);
+}
+
+.project-form .button-secondary {
+    display: inline-block;
+    margin-left: 0.25rem;
+    padding: 0.7rem 1rem;
+    background: var(--ink);
+    color: var(--paper);
+    text-decoration: none;
+    border-radius: 4px;
+}
+
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1em;
+}
+
+.project-grid .experience-card {
+    display: flex;
+    flex-direction: column;
+    border: solid 1px var(--line);
+    border-top: var(--accent-dark);
+    border-radius: 4px;
+}
+
+.project-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 0.5px solid var(--line);
+    border-radius: 4px;
+    border-top: 2px solid var(--accent-dark);
+}
+
+.project-header h1 {
+    margin-bottom: 0;
+}
+
+.project-add-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    background-color: var(--accent-dark);
+    text-decoration: none;
+    font-weight: 700;
+    color: var(--paper);
+    padding: 6px 6px 6px 6px;
+    border-radius: 4px;
+    transition: 0.7s ease;
+}
+
+.project-add-button:hover {
+    background-color: var(--accent2);
+    transform: scale(1.05);
+}
+
+.project-add-button span {
+    font-size: 1.25rem;
+    line-height: 1;
+}
+
+.project-search {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.project-search__input {
+    width: 100%;
+    min-width: 0;
+    padding: 0.7rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: #fff;
+    color: var(--ink);
+    font: inherit;
+}
+
+.project-search__input:focus {
+    outline: 2px solid var(--accent2);
+    border-color: var(--accent2);
+}
+
+.project-search .button {
+    padding: 0 1em;
+    background-color: var(--accent-dark);
+    text-decoration: none;
+    font-weight: 700;
+    color: var(--paper);
+    border-radius: 4px;
+    transition: 0.7s ease;
+    cursor:pointer;
+}
+
+.project-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 1rem;
+    padding-left: var(--card-padding);
+}
+
+.project-actions .button {
+    font-size: 0.85rem;
+    background-color: var(--accent-dark);
+    text-decoration: none;
+    font-weight: 700;
+    color: var(--paper);
+    padding: 6px 6px 6px 6px;
+    border-radius: 4px;
+    transition: 0.7s ease;
+}
+
+.project-actions .button {
+    font-family: var(--main-standard-font);
+}
+
+.project-actions .button:hover {
+    background-color: var(--accent2);
+    transform: scale(1.05);
+}
+
+.project-card-actions {
+    display: flex;
+    flex-direction: column;
+    margin-top: auto;
+}
+
+.hide {
+    display: none !important;
+}
+
+.project-actions .experience-status {
+    margin-top: 0;
+}
+
+.experience-card h2 {
+    padding-left: var(--card-padding);
+    font-family: var(--main-serif-font);
+}
+
+.experience-card .experience-category {
+    padding-left: var(--card-padding);
+    color: var(--accent-dark);
+    font-weight: 700;
+}
+
+.experience-card .experience-description {
+    padding-left: var(--card-padding);
+    color: var(--text-muted);
+}
+
+.project-delete-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    max-height: none;
+    margin: 0;
+    padding: 1rem;
+    border: 0;
+    background: transparent;
+    z-index: 10;
+    align-items: center;
+    justify-content: center;
+}
+
+.project-delete-modal:popover-open {
+    display: flex;
+}
+
+.project-delete-modal__backdrop {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    padding: 0;
+    background: rgba(28, 25, 23, 0.58);
+    cursor: default;
+}
+
+.project-delete-modal__content {
+    position: relative;
+    z-index: 1;
+    width: min(100%, 480px);
+    padding: 1.5rem;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: 0 1rem 3rem rgba(28, 25, 23, 0.22);
+}
+
+.project-delete-modal__content h2 {
+    margin: 0 0 0.75rem;
+    font-family:
+        "Space Grotesk",
+        -apple-system,
+        sans-serif;
+    font-size: 1.5rem;
+}
+
+.project-delete-modal__close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    border: 0;
+    padding: 0;
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 1.8rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.project-delete-modal__actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+}
+
+.button-danger {
+    background: var(--ink);
+    color: var(--accent-dark);
+}
+
+@media (max-width: 600px) {
+    .project-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .project-add-button {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .project-search {
+        flex-direction: column;
+    }
+
+    .project-search .button {
+        width: 100%;
+    }
+
+    .project-delete-modal {
+        align-items: flex-end;
+        padding: 0;
+    }
+
+    .project-delete-modal__content {
+        width: 100%;
+        padding: 1.25rem;
+        border-radius: var(--radius) var(--radius) 0 0;
+    }
+
+    .project-delete-modal__actions {
+        flex-direction: column-reverse;
+    }
+
+    .project-delete-modal__actions .button {
+        width: 100%;
+        text-align: center;
+    }
+}
