@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 
 from main.models import Experience, Interest, Education, Project
-from main.forms import ProjectForm
+from main.forms import ProjectForm, InterestForm
 
 
 def show_main(request):
@@ -37,6 +37,22 @@ def show_interest(request):
         "leisures": Interest.objects.filter(category="leisure"),
     }
     return render(request, "interest.html", context)
+
+def create_interest(request):
+    form = InterestForm(request.POST or None)
+    
+    if request.method == "POST" and form.is_valid():
+            form.save()
+            messages.success(request, "Peminatan baru berhasil ditambahkan!")
+            return redirect("main:show_interest")
+    
+    context = {
+        "name":"Clevraldo Limuel",
+        "name_short": "Clevr",
+        "form": form,
+    }
+    
+    return render(request, "interest_form.html", context)
 
 def show_education(request):
     context = {

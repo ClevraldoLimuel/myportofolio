@@ -1,6 +1,44 @@
-from django.forms import ModelForm, TextInput, Textarea, URLInput
+from django.forms import ModelForm, TextInput, Textarea, URLInput, Select
 
-from main.models import Project
+from main.models import Project, Interest
+
+class InterestForm(ModelForm):
+    class Meta:
+        model = Interest
+        fields = [
+            "name",
+            "description",
+            "category"
+        ]
+        
+        labels = {
+            "name" : "Nama Minat",
+            "description" : "Deskripsi Peminatan",
+            "category" : "Kategori Peminatan"
+        }
+        
+        widgets = {
+            "name" : TextInput(
+                attrs={
+                    "placeholder": "Web Development",
+                    "max_length": 255
+                }
+            ),
+            
+            "description" : Textarea(
+                attrs={
+                    "placeholder": "Ceritakan Proyekmu",
+                    "rows": 2,
+                }
+            ),
+            
+            "category" : Select(
+                attrs={
+                    "required" : True,
+                    "class": "category-select",
+                }
+            )
+        }
 
 class ProjectForm(ModelForm):
     class Meta:
