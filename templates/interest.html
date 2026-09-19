@@ -28,7 +28,7 @@
                     {% for technology_tag in technologies %}
                         {% include "components/interest_info_modal.html" with interest=technology_tag %}
                     {% empty %}
-                        <p class="tag">Its empty..</p>
+                        <p class="tag-empty">Its empty..</p>
                     {% endfor %}
                 </div>
             </div>
@@ -41,7 +41,7 @@
                     {% for creative_tag in creatives %}
                         {% include "components/interest_info_modal.html" with interest=creative_tag %}
                     {% empty %}
-                        <p class="tag">Umm..</p>
+                        <p class="tag-empty">Umm..</p>
                     {% endfor %}
                 </div>
             </div>
@@ -53,7 +53,7 @@
                         {% comment %} <p class="tag">{{ leisure_tag.name }}</p> {% endcomment %}
                         {% include "components/interest_info_modal.html" with interest=leisure_tag %}
                     {% empty %}
-                        <p class="tag">Really?</p>    
+                        <p class="tag-empty">Really?</p>    
                     {% endfor %}
                 </div>
             </div>

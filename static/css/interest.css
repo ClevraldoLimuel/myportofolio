@@ -121,6 +121,13 @@
     margin-bottom: 1rem;
 }
 
+.tag-empty {
+    background-color: var(--paper);
+    border-radius: 4px;
+    padding: 3px 5px;
+    margin-bottom: 1rem;
+}
+
 .tag .button {
     background-color: var(--paper);
     color: var(--ink);
@@ -140,12 +147,12 @@
     border: 0;
     background: transparent;
     z-index: 10;
-    align-items: center;
-    justify-content: center;
 }
 
-.interest-info-modal:popover-open {
+.interest_info_modal:popover-open {
     display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .interest-info-modal__backdrop {
@@ -179,6 +186,19 @@
     font-size: 1.5rem;
 }
 
+.interest-info-modal__close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    border: 0;
+    padding: 0;
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 1.8rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
 .interest-info-modal__actions {
     display: flex;
     justify-content: flex-end;
@@ -186,29 +206,104 @@
     margin-top: 1.5rem;
 }
 
-.button-danger {
-    background: var(--ink);
-    color: var(--accent-dark);
+.interest-delete-modal__actions {
+    justify-self: flex-end;
+    margin-top: 2rem;
 }
 
+.button-danger {
+    background: var(--ink);
+    color: var(--paper);
+}
+
+.button-danger:hover {
+    background: var(--accent-dark);
+}
+.experience-section {
+    margin-top: 70px;
+    margin-bottom: 3rem;
+}
+
+.experience-section > .container > h1 {
+    margin: 0 0 1.5rem;
+    color: var(--ink);
+    font-family: var(--main-standard-font);
+    font-size: 2rem;
+}
+
+.interest-form {
+    width: min(100%, 745px);
+}
+
+.interest-form .form-group {
+    margin-bottom: 1rem;
+}
+
+.interest-form label {
+    display: block;
+    margin-bottom: 0.45rem;
+    color: var(--ink);
+    font-weight: 700;
+}
+
+.interest-form input,
+.interest-form textarea,
+.interest-form select {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0.7rem 0.8rem;
+    border: 1px solid var(--accent2);
+    border-radius: 3px;
+    background: var(--paper);
+    color: var(--ink);
+    font: inherit;
+}
+
+.interest-form textarea {
+    min-height: 84px;
+    resize: vertical;
+}
+
+.interest-form input:focus,
+.interest-form textarea:focus,
+.interest-form select:focus {
+    outline: 2px solid var(--accent2);
+    outline-offset: 1px;
+}
+
+.interest-form > .button {
+    margin-top: 0.25rem;
+}
+
+.interest-form .button-secondary {
+    margin-left: 0.25rem;
+}
 @media (max-width: 600px) {
     .interest-intro {
+        display: grid;
+        min-width: 100vw;
         justify-items: left;
         padding-left: 0;
         margin-left: 0;
-        grid-template-rows: 1fr auto;
+        grid-template-areas:"title title" 
+                            "desc button";
+        grid-template-columns: 1fr auto;
+        border: solid 1px;
     }
 
     .interest-intro h1 {
-        grid-row: 1;
+        grid-area: title;
+        text-align: left;
+        justify-self: left;
     }
 
     .interest-intro p {
-        grid-row: 2 ;
+        min-width: 60vw;
+        grid-area: desc ;
     }
 
-    .interest-intro button {
-        grid-row: 2 ;
+    .interest-intro .button {
+        grid-area: button ;
     }
 
     .interest-content {
