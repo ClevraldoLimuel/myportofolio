@@ -54,6 +54,16 @@ def create_interest(request):
     
     return render(request, "interest_form.html", context)
 
+def delete_interest(request, interest_id):
+    interest = get_object_or_404(Interest, pk=interest_id)
+
+    if request.method == "POST":
+        interest.delete()
+        messages.success(request, "Minat berhasil dihapus!")
+        return redirect("main:show_interest")
+
+    return redirect("main:show_interest")
+
 def show_education(request):
     context = {
         "name":"Clevraldo Limuel",

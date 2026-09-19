@@ -10,7 +10,12 @@
     <main class="interest">
         <section class="interest-intro">
             <h1 class="text-main">INTERESTs</h1>
-            <p class="text-normal">Things that i am currently have interest on learning and doing</p>
+            <a href="{% url 'main:create_interest' %}"
+                       class="button interest-add-button">
+                        <span aria-hidden="true">+</span>
+                        Tambah Peminatan
+                    </a>
+            <p class="text-normal">Hal-hal yang menarik perhatian saya, mulai dari bidang yang ingin saya pelajari hingga hobi dan topik yang saya nikmati. Ketertarikan ini menjadi bagian dari proses saya dalam menemukan hal-hal baru, mengembangkan kemampuan, dan memahami lebih banyak tentang dunia di sekitar saya.</p>
         </section>
 
         <section class="interest-content">
@@ -21,7 +26,7 @@
                 </p>
                 <div class="tags-container">
                     {% for technology_tag in technologies %}
-                        <p class="tag">{{ technology_tag.name }}</p>
+                        {% include "components/interest_info_modal.html" with interest=technology_tag %}
                     {% empty %}
                         <p class="tag">Its empty..</p>
                     {% endfor %}
@@ -34,7 +39,7 @@
                 </p>
                 <div class="tags-container">
                     {% for creative_tag in creatives %}
-                        <p class="tag">{{ creative_tag.name }}</p>
+                        {% include "components/interest_info_modal.html" with interest=creative_tag %}
                     {% empty %}
                         <p class="tag">Umm..</p>
                     {% endfor %}
@@ -45,7 +50,8 @@
                 <p class="text-normal">Things that i enjoy to do for fun</p>
                 <div class="tags-container">
                     {% for leisure_tag in leisures %}
-                        <p class="tag">{{ leisure_tag.name }}</p>
+                        {% comment %} <p class="tag">{{ leisure_tag.name }}</p> {% endcomment %}
+                        {% include "components/interest_info_modal.html" with interest=leisure_tag %}
                     {% empty %}
                         <p class="tag">Really?</p>    
                     {% endfor %}

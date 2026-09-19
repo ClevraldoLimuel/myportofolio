@@ -1,0 +1,41 @@
+<p class="tag">
+    <button type="button"
+            class="button button-danger"
+            popovertarget="info-interest-{{ interest.id }}"
+            aria-label="Informasi {{ interest.name }}"
+            title="Informasi {{ interest.name }}">
+        {{ interest.name }}
+    </button>
+</p>
+<div id="info-interest-{{ interest.id }}"
+        class="interest_info_modal"
+        popover="auto"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="info-interest-name-{{ interest.id }}">
+        <button type="button"
+                class="interest-info-modal__backdrop"
+                popovertarget="info-interest-{{ interest.id }}"
+                popovertargetaction="hide"
+                aria-label="Tutup informasi interest"></button>
+        
+
+
+        <div class="interest-info-modal__content">
+        <button type="button"
+                class="interest-info-modal__close"
+                popovertarget="info-interest-{{ interest.id }}"
+                popovertargetaction="hide"
+                aria-label="Tutup informasi interest">×</button>
+        <h2 id="info-interest-name-{{ interest.id }}">{{ interest.name }}</h2>
+        <p>
+            {{ interest.description }}
+        </p>
+        <div class="interest-delete-modal__actions">
+            <form method="post" action="{% url 'main:delete_interest' interest.id %}">
+                {% csrf_token %}
+                <button type="submit" class="button-danger button">Hapus Interest</button>
+            </form>
+        </div>
+    </div>
+</div>
