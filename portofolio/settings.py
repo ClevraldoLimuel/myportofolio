@@ -59,6 +59,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+# gunakan https:// untuk trailing urlnya
+CSRF_TRUSTED_ORIGINS = ["https://clevraldo-limuel-myportofolio.pws.cs.ui.ac.id/"]
 
 ROOT_URLCONF = 'portofolio.urls'
 
