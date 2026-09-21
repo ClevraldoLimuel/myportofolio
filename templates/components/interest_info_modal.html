@@ -34,8 +34,9 @@
         <div class="interest-delete-modal__actions">
             <form method="post" action="{% url 'main:delete_interest' interest.id %}">
                 {% csrf_token %}
-                <button type="submit" class="button-danger button">Hapus Interest</button>
+                <button type="submit" class="button-danger button">Hapus</button>
             </form>
         </div>
+        {% include "components/interest_edit_modal.html" with interest=interest%}
     </div>
 </div>
