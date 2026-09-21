@@ -29,13 +29,26 @@ def show_experience(request):
     return render(request, "experience.html", context)
 
 def show_interest(request):
+    
+    technologies = Interest.objects.filter(category="technology")
+    creatives = Interest.objects.filter(category="creative")
+    leisures = Interest.objects.filter(category="leisure")
     context = {
         "name":"Clevraldo Limuel",
         "name_short": "Clevr",
-        "technologies": Interest.objects.filter(category="technology"),
-        "creatives": Interest.objects.filter(category="creative"),
-        "leisures": Interest.objects.filter(category="leisure"),
+        "technologies": technologies,
+        "creatives": creatives,
+        "leisures": leisures,
     }
+    
+    for interest in technologies:
+        interest.edit_form = InterestForm(instance=interest)
+        
+    for interest in leisures:
+        interest.edit_form = InterestForm(instance=interest)
+            
+    for interest in creatives:
+        interest.edit_form = InterestForm(instance=interest)
     return render(request, "interest.html", context)
 
 def create_interest(request):
@@ -56,6 +69,7 @@ def create_interest(request):
 
 def delete_interest(request, interest_id):
     interest = get_object_or_404(Interest, pk=interest_id)
+    print("DELETE VIEW REACHED!", interest_id, request.method, flush=True)
 
     if request.method == "POST":
         interest.delete()
@@ -70,11 +84,10 @@ def edit_interest(request, interest_id):
     if request.method == "POST":
         form = InterestForm(request.POST, instance=interest)
         
-        if (form.is_valid):
+        if form.is_valid():
             form.save()
             messages.success(request, "Minat berhasil diedit!")
             return redirect("main:show_interest")
-    
     else:
         form = InterestForm(instance=interest)
     
@@ -82,8 +95,7 @@ def edit_interest(request, interest_id):
         "form": form,
         "interest": interest        
     }
-    
-    return render(request, "edit_interest.html", context)
+    return render(request, "interest_edit_modal.html", context)
 
 def show_education(request):
     context = {

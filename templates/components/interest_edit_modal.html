@@ -1,0 +1,50 @@
+<p class="tag">
+    <button type="button"
+            class="button" "edit-button"
+            popovertarget="edit-interest-{{ interest.id }}"
+            aria-label="Informasi {{ interest.name }}"
+            title="Informasi {{ interest.name }}">
+        Edit
+    </button>
+</p>
+<div id="edit-interest-{{ interest.id }}"
+        class="interest_info_modal"
+        popover="auto"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="edit-interest-name-{{ interest.id }}">
+        <button type="button"
+                class="interest-info-modal__backdrop"
+                popovertarget="edit-interest-{{ interest.id }}"
+                popovertargetaction="hide"
+                aria-label="Tutup edit informasi interest"></button>
+        
+        <div class="interest-info-modal__content">
+        <section class="experience-section">
+            <div class="container">
+                <h1>Edit Informasi {{ interest.name }}</h1>
+                <form method="post"
+                      action="{% url 'main:edit_interest' interest.id %}"
+                      class="interest-form">
+                    {% csrf_token %}
+                    {% for field in interest.edit_form %}
+                        <div class="form-group">
+                            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                            {{ field }}
+                            {% for error in field.errors %}
+                                <p class="form-error">{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+                    <button type="submit" class="button">Simpan</button>
+                    <button type="button"
+                            class="button button-secondary"
+                            popovertarget="edit-interest-{{ interest.id }}"
+                            popovertargetaction="hide">
+                        Batal
+                    </button>
+                </form>
+            </div>
+        </section>
+    </div>
+</div>
