@@ -212,7 +212,6 @@
     display: grid;
     grid-template-columns: auto 1fr;
     gap: 2em;
-    align-self: center;
 }
 
 .button-danger {

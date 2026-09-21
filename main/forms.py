@@ -27,7 +27,7 @@ class InterestForm(ModelForm):
             
             "description" : Textarea(
                 attrs={
-                    "placeholder": "Ceritakan Proyekmu",
+                    "placeholder": "Ceritakan minatmu",
                     "rows": 2,
                 }
             ),

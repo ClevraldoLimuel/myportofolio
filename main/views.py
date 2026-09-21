@@ -29,26 +29,28 @@ def show_experience(request):
     return render(request, "experience.html", context)
 
 def show_interest(request):
+    name_query = request.GET.get("name", "").strip()
+    json_response = get_interest_json(request)
+    interests = serializers.deserialize("json", json_response.content.decode("utf-8"))
     
-    technologies = Interest.objects.filter(category="technology")
-    creatives = Interest.objects.filter(category="creative")
-    leisures = Interest.objects.filter(category="leisure")
+    interests = [ item.object for item in interests ]
+    
+    technologies = [ interest for interest in interests if interest.category == "technology" ]
+    creatives = [ interest for interest in interests if interest.category == "creative" ]
+    leisures = [ interest for interest in interests if interest.category == "leisure" ]
+    
     context = {
         "name":"Clevraldo Limuel",
         "name_short": "Clevr",
         "technologies": technologies,
         "creatives": creatives,
         "leisures": leisures,
+        "name_query": name_query,
     }
     
-    for interest in technologies:
+    for interest in interests:
         interest.edit_form = InterestForm(instance=interest)
-        
-    for interest in leisures:
-        interest.edit_form = InterestForm(instance=interest)
-            
-    for interest in creatives:
-        interest.edit_form = InterestForm(instance=interest)
+
     return render(request, "interest.html", context)
 
 def create_interest(request):
@@ -77,6 +79,16 @@ def delete_interest(request, interest_id):
         return redirect("main:show_interest")
 
     return redirect("main:show_interest")
+
+def get_interest_json(request):
+    name_query = request.GET.get("name", "").strip()
+    interests = Interest.objects.all()
+
+    if name_query:
+        interests = interests.filter(name__icontains=name_query)
+
+    interests_json = serializers.serialize("json", interests)
+    return HttpResponse(interests_json, content_type="application/json")
 
 def edit_interest(request, interest_id):
     interest = get_object_or_404(Interest, pk=interest_id)
