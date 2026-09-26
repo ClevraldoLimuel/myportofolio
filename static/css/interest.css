@@ -207,11 +207,35 @@
 }
 
 .interest-delete-modal__actions {
-    justify-self: flex-end;
+    width:100%;
     margin-top: 2rem;
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 2em;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.interest-delete-modal__actions > :nth-child(2) {
+    margin-left: auto;
+}
+
+.button-star {
+    background-color: transparent;
+    color: var(--ink);
+}
+
+.button-star:hover {
+    background-color: transparent;
+    color: var(--accent);
+}
+
+.button-star.is-starred {
+    background-color: transparent;
+    color:var(--accent);
+}
+
+.button-star.is-starred:hover {
+    background-color: transparent;
+    color: var(--ink);
 }
 
 .button-danger {

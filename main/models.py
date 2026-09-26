@@ -37,7 +37,9 @@ class Interest(models.Model):
     name = models.CharField(max_length=32)
     description = models.TextField()
     category = models.CharField(max_length=32, choices=INTEREST_CATEGORY)
-    
+    starred_by = models.ManyToManyField(
+            User, related_name="starred_interests", blank=True
+    )
     def __str__(self):
         return self.name
     

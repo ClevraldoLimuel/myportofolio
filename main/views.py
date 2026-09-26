@@ -138,7 +138,7 @@ def get_interest_json(request):
     if name_query:
         interests = interests.filter(name__icontains=name_query)
 
-    interests_json = serializers.serialize("json", interests)
+    interests_json = serializers.serialize("json", interests, use_natural_foreign_keys=True)
     return HttpResponse(interests_json, content_type="application/json")
 
 @login_required(login_url="/login/")
@@ -162,6 +162,18 @@ def edit_interest(request, interest_id):
         "interest": interest        
     }
     return render(request, "interest_edit_modal.html", context)
+
+@login_required(login_url="/login/")
+def toggle_star_interest(request, interest_id):
+    interest = get_object_or_404(Interest, pk=interest_id)
+
+    if request.method == "POST":
+        if request.user in interest.starred_by.all():
+            interest.starred_by.remove(request.user)
+        else:
+            interest.starred_by.add(request.user)
+
+    return redirect("main:show_interest")
 
 def show_education(request):
     context = {

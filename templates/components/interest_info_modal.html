@@ -32,14 +32,15 @@
             {{ interest.description }}
         </p>
         <div class="interest-delete-modal__actions">
+            {% include "components/interest_star.html" with interest=interest %}
             {% if user.is_superuser or perms.main.change_interest %}
-            {% include "components/interest_edit_modal.html" with interest=interest %}
+                {% include "components/interest_edit_modal.html" with interest=interest %}
             {% endif %}
             {% if user.is_superuser %}
-            <form method="post" action="{% url 'main:delete_interest' interest.id %}">
-                {% csrf_token %}
-                <button type="submit" class="button-danger button">Hapus</button>
-            </form>
+                <form method="post" action="{% url 'main:delete_interest' interest.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="button-danger button">Hapus</button>
+                </form>
             {% endif %}
         </div>
     </div>
