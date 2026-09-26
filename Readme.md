@@ -104,3 +104,38 @@ Yep, benar sekali, dan ini memang salah satu jebakan vh: viewport pendek tidak s
 2. Data yang disimpan di models adalah data yang dapat berubah, baik diedit, dihapus, maupun ditambah. Untuk halaman yang datanya dapat berubah-ubah seperti experience, education, dan interest, penggunaan models dapat memudahkan perubahan data, sedangkan halaman yang statis seperti main yang hanya berisi data sederhana tidak membutuhkan model (overkill). Penggunaan model memungkinkan pemeliharaan dan pengembangan aplikasi yang lebih stabil dan reaktif terhadap perubahan data dan jumlah data.
    
 3. makemigrations membuat file yang berisi informasi rencana perubahan model database, sedangkan migrate menerapkan perubahan tersebut pada database. Perubahan yang memerlukan kedua perintah tersebut adalah perubahan yang melibatkan perubahan bentuk, jumlah atribut, karakteristik atribut, perubahan entitas, dan sebagainya, seperti menambah entitas baru (Education dan Interest). Penambahan data dan perubahan pada instance suatu entitas tidak memerlukan kedua perintah tersebut. Simpelnya, lakukan makemigrations dan migrate jika mengubah template data, tidak perlu jika mengubah instance data.
+
+
+
+## WEEK 3
+
+### Progress:
+
+- Mengimplementasikan kerangka tampilan web untuk mengurangi redundansi kode bagian head, header, dan footer
+
+- Menambahkan halaman Projects
+
+- Menerapkan forms pada halaman Projects dan Interest
+
+- Menambahkan fitur { Menambahkan, Mengubah, dan Menghapus } data Interest dari page Interest
+
+- Mengimplementasikan data delivery dengan JSON pada data Projects dan Interest
+
+
+### Challenges:
+
+Tantangan utama yang saya hadapi dalam pengembangan web minggu ketiga ini adalah pengimplementasian popover yang berlapis pada page Interest, yaitu pada popover interest-info yang kemudian dapat memunculkan popover interest-edit. Saya menghadapi tembok yang disebabkan kurangnya pemahaman fungsi popover itu sendiri, forms, dan pentingnya url yang unik.
+
+
+### AI Disclosure:
+
+Saya menggunakan AI sebagai alat bantu selama proses pengembangan portfolio website, terutama dalam menyelesaikan permasalahan terkait bug dan fixes dalam implementasi forms dan memeriksa kemungkinan penyebab error. Contoh:
+https://chatgpt.com/share/6ab1431c-baf8-83ec-a872-b8acb22be352
+
+
+## TUGAS 3[](url)
+1. ModelForm dapat membuat form berdasarkan struktur model yang telah dibuat dengan field-field yang dapat dikonfigurasi atributnya secara otomatis, sehingga mengurangi duplikasi kode dan mempermudah proses pengembangan serta pemeliharaan website maupun aplikasi. Atribut tambahan yang diberikan baik di forms maupun yang tersedia di models juga memberikan fitur validasi data, serta mempermudah penyimpanan data di database. csrf_token adalah token keamanan yang diberikan Django untuk memastikan bahwa request fetching dan update data datang dari sumber yang sah (dapat diatur di dalam settings.py) 
+   
+2. JSON lebih disukai karena syntax JSON yang lebih sederhana, dengan struktur pasangan key dan value, dibanding dengan XML yang menggunakan tag. JSON juga lebih lightweight dan readable bagi manusia maupun mesin. JSON juga sudah kompatibel dengan berbagai framework dan teknologi web modern.
+   
+3. Alur yang terjadi yaitu ketika user mengirim url yang mengarah pada suatu fungsi, yang memanggil fungsi get_[DATA]_json(request) yang mengambil semua data dalam bentuk objek lalu di serialize dengan format json. Fungsi tersebut lalu memeroleh paket data yang berupa JSON dari fungsi get_[DATA]_json(request), yang kemudian di parse/deserialisasi kembali yang akan diolah sehingga data tersebut dapat ditampilkan. Proses serialisasi penting dilakukan karena data objek mentahan dari database tidak terstruktur dan sulit diolah. Serialization berfungsi untuk mengubah data tersebut menjadi representasi terstruktur yang dapat dikonversi ke JSON.
