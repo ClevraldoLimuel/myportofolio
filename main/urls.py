@@ -1,10 +1,13 @@
 from django.urls import path
 
-from main.views import show_main, show_experience, show_interest, get_interest_json, create_interest, delete_interest, edit_interest, show_education, create_project, show_project, get_projects_json, delete_project
+from main.views import register, login_user, logout_user, show_main, show_experience, show_interest, get_interest_json, create_interest, delete_interest, edit_interest, show_education, create_project, show_project, get_projects_json, delete_project
 
 app_name = "main"
 
 urlpatterns = [
+    path("register/", register, name="register"),
+    path("login/", login_user, name="login"),
+    path("logout/", logout_user, name="logout"),
     path("", show_main, name="show_main"),
     path("experience/", show_experience, name="show_experience"),
     path('interest/', show_interest, name='show_interest'),
