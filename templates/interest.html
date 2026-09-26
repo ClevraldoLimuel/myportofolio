@@ -10,11 +10,13 @@
     <main class="interest">
         <section class="interest-intro">
             <h1 class="text-main">INTERESTs</h1>
+            {% if user.is_superuser %}
             <a href="{% url 'main:create_interest' %}"
                        class="button interest-add-button">
-                        <span aria-hidden="true">+</span>
-                        Tambah Peminatan
-                    </a>
+                <span aria-hidden="true">+</span>
+                Tambah Peminatan
+            </a>
+            {% endif %}
             <p class="text-normal">Hal-hal yang menarik perhatian saya, mulai dari bidang yang ingin saya pelajari hingga hobi dan topik yang saya nikmati. Ketertarikan ini menjadi bagian dari proses saya dalam menemukan hal-hal baru, mengembangkan kemampuan, dan memahami lebih banyak tentang dunia di sekitar saya.</p>
         </section>
 

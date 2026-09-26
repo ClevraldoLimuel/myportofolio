@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth import login, logout
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from django.core.exceptions import PermissionDenied      
 import datetime
 
@@ -98,7 +98,10 @@ def show_interest(request):
 
     return render(request, "interest.html", context)
 
+@login_required(login_url="/login/")
 def create_interest(request):
+    if not request.user.is_superuser:
+            raise PermissionDenied
     form = InterestForm(request.POST or None)
     
     if request.method == "POST" and form.is_valid():
@@ -114,7 +117,10 @@ def create_interest(request):
     
     return render(request, "interest_form.html", context)
 
+@login_required(login_url="/login/")
 def delete_interest(request, interest_id):
+    if not request.user.is_superuser:
+            raise PermissionDenied    
     interest = get_object_or_404(Interest, pk=interest_id)
     print("DELETE VIEW REACHED!", interest_id, request.method, flush=True)
 
@@ -135,7 +141,10 @@ def get_interest_json(request):
     interests_json = serializers.serialize("json", interests)
     return HttpResponse(interests_json, content_type="application/json")
 
+@login_required(login_url="/login/")
 def edit_interest(request, interest_id):
+    if not (request.user.is_superuser or request.user.has_perm("main.change_interest")):
+            raise PermissionDenied
     interest = get_object_or_404(Interest, pk=interest_id)
     
     if request.method == "POST":
