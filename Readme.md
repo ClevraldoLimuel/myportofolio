@@ -139,3 +139,29 @@ https://chatgpt.com/share/6ab1431c-baf8-83ec-a872-b8acb22be352
 2. JSON lebih disukai karena syntax JSON yang lebih sederhana, dengan struktur pasangan key dan value, dibanding dengan XML yang menggunakan tag. JSON juga lebih lightweight dan readable bagi manusia maupun mesin. JSON juga sudah kompatibel dengan berbagai framework dan teknologi web modern.
    
 3. Alur yang terjadi yaitu ketika user mengirim url yang mengarah pada suatu fungsi, yang memanggil fungsi get_[DATA]_json(request) yang mengambil semua data dalam bentuk objek lalu di serialize dengan format json. Fungsi tersebut lalu memeroleh paket data yang berupa JSON dari fungsi get_[DATA]_json(request), yang kemudian di parse/deserialisasi kembali yang akan diolah sehingga data tersebut dapat ditampilkan. Proses serialisasi penting dilakukan karena data objek mentahan dari database tidak terstruktur dan sulit diolah. Serialization berfungsi untuk mengubah data tersebut menjadi representasi terstruktur yang dapat dikonversi ke JSON.
+
+
+
+## WEEK 4
+
+### Progress:
+
+- Membuat sistem register, dan login serta logout untuk user yang telah terdaftar
+- Menampilkan status login dan informasi last login
+- Menambahkan fitur starred projects dan starred interests yang bisa dilakukan oleh registered user
+- Menambahkan jenis user: Editor
+- Memberi constraint terhadap akses user berdasarkan jenis user;
+    - Unregistered : Melihat
+    - Registered : Memfavoritkan project dan interest
+    - Editor : Mengubah informasi project dan interest
+    - Superuser : full-access (Add dan Delete Project dan interest)
+
+### Challenges:
+
+Tantangan yang saya hadapi pada pengembangan web minggu keempat adalah penambahan jenis user baru, yaitu Editor, (yang ternyata bisa ditambahkan dari /admin).
+
+
+### AI Disclosure:
+
+Saya menggunakan AI sebagai alat bantu selama proses pengembangan portfolio website, terutama dalam memahami implementasi autentikasi Django, permission dan pembatasan akses berdasarkan role user, serta membantu mencari penyebab bug yang muncul selama proses pengembangan. Contoh:
+https://chatgpt.com/c/6aba5d24-45bc-83ec-830a-95b655116824
