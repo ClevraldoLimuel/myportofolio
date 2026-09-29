@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Aboreto&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/toast.css">
     {% block meta %} {% endblock meta %}
 </head>
 
@@ -45,5 +46,7 @@
             <p>&copy; 2026 {{ name_short }}. Fakultas Ilmu Komputer, Universitas Indonesia.</p>
         </div>
     </footer>
+
+    {% include 'components/toast.html' %}
 </body>
 </html>
