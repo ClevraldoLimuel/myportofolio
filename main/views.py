@@ -66,12 +66,40 @@ def show_main(request):
 
 
 def show_experience(request):
+    title_query = request.GET.get("title", "").strip()
     context = {
         "name": "Clevraldo Limuel",
         "name_short": "Clevr",
-        "experience_list": Experience.objects.all(),
+        "title_query":title_query,
     }
     return render(request, "experience.html", context)
+
+def get_experience_json(request):
+    title_query = request.GET.get("title", "").strip()
+    experiences = Experience.objects.all()
+
+    if title_query:
+        experiences = experiences.filter(title__icontains=title_query)
+
+    # Konstruksi data JSON secara manual agar bisa menyisipkan logika Star
+    data = []
+    for exp in experiences:
+        isOngoing = exp.is_ongoing
+        data.append({
+            "pk": str(exp.id),
+            "fields": {
+                "title": exp.title,
+                "description": exp.description,
+                "category": exp.category,
+                "thumbnail": exp.thumbnail,
+                "started_at": exp.started_at,
+                "ended_at": exp.ended_at,
+                "is_ongoing": isOngoing,
+            }
+        })
+
+    return JsonResponse(data, safe=False)
+
 
 def show_interest(request):
     name_query = request.GET.get("name", "").strip()
