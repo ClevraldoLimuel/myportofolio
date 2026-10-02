@@ -14,6 +14,14 @@
                 <button class="button button-secondary" onclick="showToast('Notifikasi Sistem', 'Experiences berhasil dimuat dengan baik!', 'success')">
                     Test Toast Notifikasi
                 </button>
+                {% if user.is_superuser %}
+                <button type="button"
+                        class="button experience-add-button"
+                        popovertarget="add-experience-modal">
+                    <span aria-hidden="true">+</span>
+                    Tambah Pengalaman
+                </button>
+                {% endif %}
                 <form id="experience-search-form" class="experience-search">
                         <input type="search"
                             id="search-input"
@@ -40,13 +48,17 @@
                         <p>Belum ada experience yang ditambahkan atau ditemukan.</p>
                     </div>
 
-                    <!-- Project Grid -->
+                    <!-- Experience Grid -->
                     <div id="grid" class="experience-grid exp-grid hide"></div>
 
                 </div>
             </div>
         </section>
     </main>
+
+    {% if user.is_superuser %}
+        {% include "components/experience_form_modal.html" %}
+    {% endif %}
 
     <script>
     // Konfigurasi
@@ -61,6 +73,8 @@
     const gridContainer = document.getElementById('grid');
     const searchForm = document.getElementById('experience-search-form');
     const searchInput = document.getElementById('search-input');
+    const SEARCH_DEBOUNCE_DELAY = 300;
+    let searchDebounceTimer;
 
     // Menyembunyikan/Menampilkan section halaman
     function displayPageSection({ showLoading = false, showError = false, showEmpty = false, showGrid = false }) {
@@ -68,6 +82,16 @@
         errorState.classList.toggle('hide', !showError);
         emptyState.classList.toggle('hide', !showEmpty);
         gridContainer.classList.toggle('hide', !showGrid);
+    }
+
+        // Mengubah karakter khusus HTML menjadi entity agar ditampilkan sebagai teks
+    function escapeHtml(value) {
+        return String(value ?? '')
+            .replaceAll('&', '&amp;')
+            .replaceAll('<', '&lt;')
+            .replaceAll('>', '&gt;')
+            .replaceAll('"', '&quot;')
+            .replaceAll("'", '&#39;');
     }
 
     // Membuat elemen card experience
@@ -79,7 +103,7 @@
         articleElement.className = 'experience-card';
 
         // Dummy UUID digunakan untuk digantikan oleh ID asli dari data JSON
-        const deleteUrl = "{% url 'main:delete_project' '00000000-0000-0000-0000-000000000000' %}"
+        {% comment %} const deleteUrl = "{% url 'main:delete_experience' '00000000-0000-0000-0000-000000000000' %}"
             .replace('00000000-0000-0000-0000-000000000000', experienceId);
 
         const deleteHtml = IS_SUPERUSER 
@@ -87,16 +111,16 @@
                 {% csrf_token %}
                 <button type="submit" class="button button-danger" onclick="return confirm('Yakin ingin menghapus experience ini?');">Hapus</button>
             </form>`
-            : '';
+            : ''; {% endcomment %}
 
         // Komponen card
         const completeCardHtml = `
             <span class="experience-category">${experience.category}</span>
-            <h2>${experience.title}</h2>
-            <p class="experience-description">${experience.description}</p>
+            <h2>${escapeHtml(experience.title)}</h2>
+            <p class="experience-description">${escapeHtml(experience.description)}</p>
 
-            {% comment %} <div class="project-card-actions">
-                <div class="project-actions">
+            {% comment %} <div class="experience-card-actions">
+                <div class="experience-actions">
                     ${urlHtml}
                     
                     <form method="post" action="${starUrl}" class="star-form">
@@ -106,7 +130,7 @@
                                 title="${starTitle}">
                             <span aria-hidden="true">★</span>
                             ${starText}
-                            <span class="star-count">${project.star_count}</span>
+                            <span class="star-count">${experience.star_count}</span>
                         </button>
                     </form>
 
@@ -125,7 +149,11 @@
         return articleElement;
     }
 
-    // Fetch data project
+    function closeExperienceModal() {
+        document.getElementById("add-experience-modal").hidePopover();
+    }
+
+    // Fetch data experience
     async function fetchExperiences(searchQuery = "") {
         if (experiencesAbortController) experiencesAbortController.abort();
         experiencesAbortController = new AbortController();
@@ -161,10 +189,80 @@
     }
 
     // Event Handlers untuk Form Search
-    searchForm.addEventListener('submit', function(e) {
-        e.preventDefault(); // Mencegah reload halaman
-        fetchExperiences(searchInput.value.trim()); // Jalankan pencarian via AJAX
+    function searchExperiences() {
+        fetchExperiences(searchInput.value.trim());
+    }
+
+    searchInput.addEventListener("input", function() {
+        clearTimeout(searchDebounceTimer);
+
+        searchDebounceTimer = setTimeout(function() {
+            searchExperiences();
+        }, SEARCH_DEBOUNCE_DELAY);
     });
+
+    searchForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+        clearTimeout(searchDebounceTimer);
+        searchExperiences();
+    });
+
+        const CREATE_EXPERIENCE_ENDPOINT = "{% url 'main:create_experience_ajax' %}";
+    const experienceForm = document.getElementById('experience-form');
+
+    // Membaca nilai cookie, digunakan untuk mengambil token CSRF
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+    // Mengirim data form ke server
+    async function addExperience(event) {
+        event.preventDefault();
+
+        const submitButton = experienceForm.querySelector('button[type="submit"]');
+        submitButton.disabled = true;
+
+        try {
+            const response = await fetch(CREATE_EXPERIENCE_ENDPOINT, {
+                method: 'POST',
+                headers: { 'X-CSRFToken': getCookie('csrftoken') },
+                body: new FormData(experienceForm),
+            });
+            const result = await response.json().catch(() => ({}));
+
+            if (response.ok) {
+                experienceForm.reset();
+                closeExperienceModal();
+                showToast('Berhasil', 'Pengalaman baru berhasil ditambahkan!', 'success');
+                fetchExperiences(searchInput.value.trim());
+            } else {
+                const errorMessages = result.errors
+                    ? Object.values(result.errors).flat().map(error => error.message)
+                    : [result.message || `Terjadi kesalahan (status ${response.status}).`];
+                showToast('Gagal menambahkan pengalaman', errorMessages.join(' '), 'error');
+            }
+        } catch (error) {
+            console.error('Error adding experience:', error);
+            showToast('Gagal menambahkan pengalaman', 'Tidak dapat terhubung ke server. Silakan coba lagi.', 'error');
+        } finally {
+            submitButton.disabled = false;
+        }
+    }
+
+    if (experienceForm) {
+        experienceForm.addEventListener('submit', addExperience);
+    }
 
     // Start application
     fetchExperiences(searchInput.value.trim());

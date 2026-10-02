@@ -10,7 +10,7 @@ import datetime
 
 
 from main.models import Experience, Interest, Education, Project
-from main.forms import ProjectForm, InterestForm
+from main.forms import ProjectForm, InterestForm, ExperienceForm
 
 def register(request):
     form = UserCreationForm(request.POST or None)
@@ -71,8 +71,49 @@ def show_experience(request):
         "name": "Clevraldo Limuel",
         "name_short": "Clevr",
         "title_query":title_query,
+        "form":ExperienceForm(),
     }
     return render(request, "experience.html", context)
+
+@login_required(login_url="/login/")
+def create_experience(request):
+    if not request.user.is_superuser:
+        raise PermissionDenied
+    form = ExperienceForm(request.POST or None)
+
+    if request.method == "POST" and form.is_valid():
+        form.save()
+        messages.success(request, "Pengalaman baru berhasil ditambahkan!")
+        return redirect("main:show_experience")
+
+    context = {
+        "name":"Clevraldo Limuel",
+        "name_short": "Clevr",
+        "form": form,
+    }
+    return render(request, "experience_form.html", context)
+
+from django.views.decorators.http import require_POST
+
+...
+
+@require_POST
+def create_experience_ajax(request):
+    if not request.user.is_superuser:
+        return JsonResponse(
+            {"message": "Hanya pemilik portofolio yang dapat menambahkan pengalaman."},
+            status=403,
+        )
+
+    form = ExperienceForm(request.POST)
+    if form.is_valid():
+        experience = form.save()
+        return JsonResponse(
+            {"message": "Pengalaman berhasil ditambahkan.", "pk": str(experience.id)},
+            status=201,
+        )
+
+    return JsonResponse({"errors": form.errors.get_json_data()}, status=400)
 
 def get_experience_json(request):
     title_query = request.GET.get("title", "").strip()
