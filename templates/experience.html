@@ -103,7 +103,7 @@
         articleElement.className = 'experience-card';
 
         // Dummy UUID digunakan untuk digantikan oleh ID asli dari data JSON
-        {% comment %} const deleteUrl = "{% url 'main:delete_experience' '00000000-0000-0000-0000-000000000000' %}"
+        const deleteUrl = "{% url 'main:delete_experience' '00000000-0000-0000-0000-000000000000' %}"
             .replace('00000000-0000-0000-0000-000000000000', experienceId);
 
         const deleteHtml = IS_SUPERUSER 
@@ -111,7 +111,7 @@
                 {% csrf_token %}
                 <button type="submit" class="button button-danger" onclick="return confirm('Yakin ingin menghapus experience ini?');">Hapus</button>
             </form>`
-            : ''; {% endcomment %}
+            : '';
 
         // Komponen card
         const completeCardHtml = `
@@ -119,11 +119,15 @@
             <h2>${escapeHtml(experience.title)}</h2>
             <p class="experience-description">${escapeHtml(experience.description)}</p>
 
-            {% comment %} <div class="experience-card-actions">
+            ${experience.is_ongoing
+                ? '<p class="experience-status">Sedang berlangsung</p>'
+                : '<p class="experience-status">Selesai</p>'
+            }
+
+            <div class="experience-card-actions">
                 <div class="experience-actions">
-                    ${urlHtml}
                     
-                    <form method="post" action="${starUrl}" class="star-form">
+                    {% comment %} <form method="post" action="${starUrl}" class="star-form">
                         {% csrf_token %}
                         <button type="submit" 
                                 class="button button-star${isStarredClass}"
@@ -132,16 +136,11 @@
                             ${starText}
                             <span class="star-count">${experience.star_count}</span>
                         </button>
-                    </form>
+                    </form> {% endcomment %}
 
                     ${deleteHtml}
                 </div>
-            </div> {% endcomment %}
-
-            ${experience.is_ongoing
-                ? '<p class="experience-status">Sedang berlangsung</p>'
-                : '<p class="experience-status">Selesai</p>'
-            }
+            </div>
         
         `;
 
