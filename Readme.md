@@ -165,3 +165,38 @@ Tantangan yang saya hadapi pada pengembangan web minggu keempat adalah penambaha
 
 Saya menggunakan AI sebagai alat bantu selama proses pengembangan portfolio website, terutama dalam memahami implementasi autentikasi Django, permission dan pembatasan akses berdasarkan role user, serta membantu mencari penyebab bug yang muncul selama proses pengembangan. Contoh:
 https://chatgpt.com/c/6aba5d24-45bc-83ec-830a-95b655116824
+
+
+
+## WEEK 5
+
+### Progress:
+
+- Mengimplementasikan notifikasi toast sebagai notifikasi status penambahan projek dan pengalaman
+  
+- Menampilkan data serta menambah data projek dan pengalaman dengan AJAX sehingga bersifat dinamis
+
+- Menambahkan fitur pencarian pengalaman dan menerapkan debouncing pada pencarian pengalaman dan projek
+
+- Menambahkan fitur starred pada experience sama seperti pada Interest dan Project pada progress week 4
+
+- Melindungi aplikasi dari XSS pada sisi Projects dan Experiences
+
+
+### Challenges:
+
+Tantangan yang saya hadapi minggu ini adalah penggunaan javascript dalam menghandle logika secara langsung yang sering membuat saya bingung dalam penerapannya secara fleksibel dalam bagian-bagian aplikasi lainnya yang tidak disertakan di dalam tutorial.
+
+### AI Disclosure:
+
+Saya menggunakan AI sebagai alat bantu selama proses pengembangan portfolio website, terutama dalam memahami syntax dan penggunaan javascript dalam menerapkan AJAX. Contoh:
+https://chatgpt.com/c/6ac3719b-346c-83ec-8d03-24564e378a0d
+
+
+
+## TUGAS 5
+1. Debouncing adalah teknik untuk menunda eksekusi suatu fungsi sehingga terdapat semacam _delay_ yang terjadi antara input dan eksekusi. Hal ini penting untuk diterapkan di dalam pencarian yang menggunakan AJAX karena tanpa debouncing, akan terjadi eksekusi setiap kali user mengetikkan satu karakter. Hal ini dapat menyebabkan beban berlebih pada jumlah request terhadap server. Dengan adanya debouncing, fungsi pencarian akan dieksekusi setelah user berhenti mengetik dalam selang waktu yang dapat ditentukan.
+ 
+2. Await akan menunggu hingga proses fetch selesai, sehingga program dapat melanjutkan prosesnya dengan data yang sudah diambil secara lengkap. Tanpa await, hasil eksekusi program akan menjadi unexpected dan sangat berpotensi terjadinya error.
+
+3. XSS adalah serangan dimana penyerang mengirimkan kode javascript melalui titik-titik penginputan data (contohnya add project) sehingga kode terebut diterima sebagai potongan kode yang dianggap sah oleh program. Data yang ditampilkan melalui template django lebih aman dari XSS karena django sudah melakukan _escaping_, sementara dengan AJAX, pembuat aplikasi harus melakukan escaping terhadap data yang diterima secara langsung.
