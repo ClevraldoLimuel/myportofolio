@@ -108,6 +108,18 @@ def delete_experience(request, experience_id):
 
     return redirect("main:show_experience")
 
+@login_required(login_url="/login/")
+def toggle_star_experience(request, experience_id):
+    experience = get_object_or_404(Experience, pk=experience_id)
+
+    if request.method == "POST":
+        if request.user in experience.starred_by.all():
+            experience.starred_by.remove(request.user)
+        else:
+            experience.starred_by.add(request.user)
+
+    return redirect("main:show_experience")
+
 @require_POST
 def create_experience_ajax(request):
     if not request.user.is_superuser:
@@ -136,6 +148,9 @@ def get_experience_json(request):
     # Konstruksi data JSON secara manual agar bisa menyisipkan logika Star
     data = []
     for exp in experiences:
+        starred_users = exp.starred_by.all()
+        is_starred = request.user in starred_users if request.user.is_authenticated else False
+        starred_by_names = ", ".join([u.username for u in starred_users])
         isOngoing = exp.is_ongoing
         data.append({
             "pk": str(exp.id),
@@ -147,6 +162,9 @@ def get_experience_json(request):
                 "started_at": exp.started_at,
                 "ended_at": exp.ended_at,
                 "is_ongoing": isOngoing,
+                "star_count": starred_users.count(),
+                "is_starred": is_starred,
+                "starred_by_names": starred_by_names,
             }
         })
 
@@ -349,7 +367,6 @@ def toggle_star(request, project_id):
     return redirect("main:show_project")
 
 from django.views.decorators.http import require_POST
-
 @require_POST
 def create_project_ajax(request):
     if not request.user.is_superuser:

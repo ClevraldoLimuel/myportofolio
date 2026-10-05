@@ -56,6 +56,177 @@
     display: none !important;
 }
 
+.experience-section .button,
+.experience-form-modal .button {
+    display: inline-block;
+    border: 0;
+    padding: 0.7rem 1rem;
+    background: var(--accent-dark);
+    color: var(--paper);
+    font: inherit;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.experience-section .button:hover,
+.experience-form-modal .button:hover {
+    background: var(--accent2);
+    transform: scale(1.03);
+}
+
+.experience-section .button:focus-visible,
+.experience-form-modal .button:focus-visible,
+.experience-form-modal__close:focus-visible {
+    outline: 2px solid var(--accent2);
+    outline-offset: 2px;
+}
+
+.experience-section .button:disabled,
+.experience-form-modal .button:disabled {
+    cursor: wait;
+    opacity: 0.65;
+    transform: none;
+}
+
+.experience-section .button-secondary,
+.experience-form-modal .button-secondary {
+    background: var(--ink);
+    color: var(--paper);
+}
+
+.experience-section .experience-add-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+}
+
+.experience-add-button span {
+    font-size: 1.25rem;
+    line-height: 1;
+}
+
+.experience-search {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    margin-top: 1rem ;
+}
+
+.experience-search__input {
+    width: 100%;
+    min-width: 0;
+    padding: 0.7rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: #fff;
+    color: var(--ink);
+    font: inherit;
+}
+
+.experience-search__input:focus {
+    outline: 2px solid var(--accent2);
+    border-color: var(--accent2);
+}
+
+.experience-search .button {
+    padding: 0 1rem;
+}
+
+.experience-form .form-group {
+    margin-bottom: 1rem;
+}
+
+.experience-form .form-group label {
+    display: block;
+    margin-bottom: 0.45rem;
+    color: var(--ink);
+    font-weight: 700;
+}
+
+.experience-form .form-group input,
+.experience-form .form-group textarea,
+.experience-form .form-group select {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0.7rem 0.8rem;
+    border: 1px solid var(--accent2);
+    border-radius: 3px;
+    background: var(--paper);
+    color: var(--ink);
+    font: inherit;
+}
+
+.experience-form .form-group textarea {
+    min-height: 84px;
+    resize: vertical;
+}
+
+.experience-form .form-group input:focus,
+.experience-form .form-group textarea:focus,
+.experience-form .form-group select:focus {
+    outline: 2px solid var(--accent2);
+    outline-offset: 1px;
+}
+
+.experience-form .form-error {
+    margin-top: 0.35rem;
+    color: var(--accent-dark);
+    font-size: 0.9rem;
+}
+
+.experience-section .experience-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1rem;
+}
+
+.experience-section .experience-actions .button {
+    padding: 6px;
+    font-size: 0.85rem;
+}
+
+.experience-section .star-form {
+    display: inline-flex;
+}
+
+.experience-section .button-star {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: var(--accent-dark);
+}
+
+.experience-section .button-star:hover {
+    background: var(--accent2);
+}
+
+.experience-section .button-star.is-starred {
+    background: var(--accent);
+}
+
+.experience-section .star-count {
+    padding: 0.05rem 0.4rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.25);
+    font-size: 0.8rem;
+}
+
+.experience-section .button-danger {
+    background: var(--accent-dark);
+    color: var(--paper);
+}
+
+.experience-section .button-danger:hover {
+    background: var(--ink);
+    color: var(--paper);
+}
+
 .experience-form-modal {
     display: none;
     position: fixed;
@@ -147,5 +318,20 @@
     .experience-form-modal__actions .button {
         width: 100%;
         text-align: center;
+    }
+
+    .experience-search {
+        flex-direction: column;
+    }
+
+    .experience-search .button,
+    .experience-section .experience-add-button {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .experience-section .button:hover,
+    .experience-form-modal .button:hover {
+        transform: none;
     }
 }
