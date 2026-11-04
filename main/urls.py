@@ -1,7 +1,6 @@
-from django.urls import path
+from django.urls import include, path
 
 from main.views import register, login_user, logout_user, show_main, show_experience, delete_experience, toggle_star_experience, get_experience_json, create_experience, create_experience_ajax, show_interest, get_interest_json, create_interest, delete_interest, edit_interest, show_education, create_project, show_project, get_projects_json, delete_project, toggle_star, toggle_star_interest, create_project_ajax
-
 app_name = "main"
 
 urlpatterns = [
