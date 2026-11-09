@@ -11,7 +11,6 @@ import datetime
 
 from main.models import Experience, Interest, Education, Project
 from main.forms import ProjectForm, InterestForm, ExperienceForm
-from main.permissions import IsPortfolioOwnerOrEditorOrReadOnly
 
 def register(request):
     form = UserCreationForm(request.POST or None)

@@ -48,7 +48,7 @@ class ExperienceSerializer(serializers.ModelSerializer):
     starred_by_names = serializers.SerializerMethodField()
 
     class Meta:
-        model = Project
+        model = Experience
         fields = [
             "id", "title", "description", "category",
             "thumbnail", "started_at", "ended_at",
@@ -65,10 +65,10 @@ class ExperienceSerializer(serializers.ModelSerializer):
     def validate_description(self, value):
         return strip_tags(value)
 
-    def validate_category(self, value):
-        if value not in Experience.EXPERIENCE_CHOICES:
-            raise serializers.ValidationError("Category must match the available options")
-        return strip_tags(value)
+    # def validate_category(self, value):
+    #     if value not in Experience.EXPERIENCE_CHOICES:
+    #         raise serializers.ValidationError("Category must match the available options")
+    #     return strip_tags(value)
     
     def validate_dates(self,dates):
         started_at = dates.get('started_at', getattr(self.instance, 'started_at', None))
