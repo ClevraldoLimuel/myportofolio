@@ -200,3 +200,28 @@ https://chatgpt.com/c/6ac3719b-346c-83ec-8d03-24564e378a0d
 2. Await akan menunggu hingga proses fetch selesai, sehingga program dapat melanjutkan prosesnya dengan data yang sudah diambil secara lengkap. Tanpa await, hasil eksekusi program akan menjadi unexpected dan sangat berpotensi terjadinya error.
 
 3. XSS adalah serangan dimana penyerang mengirimkan kode javascript melalui titik-titik penginputan data (contohnya add project) sehingga kode terebut diterima sebagai potongan kode yang dianggap sah oleh program. Data yang ditampilkan melalui template django lebih aman dari XSS karena django sudah melakukan _escaping_, sementara dengan AJAX, pembuat aplikasi harus melakukan escaping terhadap data yang diterima secara langsung.
+
+
+## WEEK 7
+
+### Progress:
+
+- Mengimplementasikan REST API pada project dan ecperience
+- Memperbarui unit tests
+
+### Challenges:
+
+Tantangan yang saya hadapi minggu ini adalah konfigurasi ulang javascript yang kini membangun snippet html dari objek langsung dengan event handler yang cukup terpisah bila dibandingkan dengan sebelumnya.
+
+### AI Disclosure:
+
+Saya menggunakan AI sebagai alat bantu selama proses pengembangan portfolio website, terutama dalam memahami syntax dan penggunaan javascript dalam merefactor logikanya. Contoh:
+https://chatgpt.com/c/6af1f2a5-ced8-83ec-acf1-c4cb0d343b2d
+
+
+
+## TUGAS 6
+1. REST adalah arsitektur software yang menerapkan standar pertukaran data melalui protokol HTTP dengan memperlakukan setiap entitas aplikasi sebagai resource yang dapat diakses melalui URL. Meskipun mengembalikan JSON, sebuah API masih belum dapat dikatakan sebagai Restful API karena mungkin melanggar syarat bentuk arsitektur yang seragam. PUT mengoverwrite semua field dari data yang dimanipulasi, sedangkan patch hanya mengubah sebagian, yaitu bagian field yang disebutkan saja.
+2. Serializer dapat menjadi penerjemah tipe data kompleks menjadi tipe data primitif python. Merakit manual dapat dilakukan, tetapi perlu dilakukan pemetaan untuk tiap field, sementara kita bisa memanfaatkan ModelSerializer yang otomatis 'menerjemahkan' model django menjadi JSON yang rapi.
+3. Authentication mengecek siapa pengguna yang membuat request, sedangkan Authorization mengecek apakah pengguna dapat melakukan apa. Hak akses harus diregulasi dengan permission karena front-end dapat di-bypass dengan mudah
+4. SessionAuthentication menggunakan sessionid yang disimpan di cookie user, sehingga penyerang dapat menggunakan sessionid tersebut untuk berpura-pura menjadi user tersebut. Pengujian menggunakan force_authenticate pada APIClient DRF tidak membuktikan apa pun terkait keandalan perlindungan CSRF karena membypass alur autentikasi dan CSRF secara sengaja.
