@@ -51,7 +51,7 @@ class ExperienceSerializer(serializers.ModelSerializer):
         model = Experience
         fields = [
             "id", "title", "description", "category",
-            "thumbnail", "started_at", "ended_at",
+            "thumbnail", "started_at", "ended_at", "is_ongoing",
             "star_count", "is_starred", "starred_by_names",
         ]
         read_only_fields = ["id"]
@@ -70,7 +70,7 @@ class ExperienceSerializer(serializers.ModelSerializer):
     #         raise serializers.ValidationError("Category must match the available options")
     #     return strip_tags(value)
     
-    def validate_dates(self,dates):
+    def validate(self,dates):
         started_at = dates.get('started_at', getattr(self.instance, 'started_at', None))
         ended_at = dates.get('ended_at', getattr(self.instance, 'ended_at', None))
 
