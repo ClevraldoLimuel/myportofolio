@@ -125,3 +125,13 @@ def experience_star(request, exp_id):
         exp.starred_by.add(request.user)
     serializer = ExperienceSerializer(exp, context={"request": request})
     return Response(serializer.data)
+
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+def api_logout(request):
+    # TODO: Delete request.auth if it is not None, then return HTTP 204 No Content
+    if request.auth :
+        request.auth = None
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    pass
+

@@ -45,11 +45,18 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'main',
-    'rest_framework',
+    "corsheaders",
+    "rest_framework",
+    # TODO: Add DRF's built-in authtoken app
+    "main",
 ]
 
 MIDDLEWARE = [
+    # TODO: Add corsheaders.middleware.CorsMiddleware before CommonMiddleware
+    "corsheaders.middleware.CorsMiddleware",
+    "django.middleware.security.SecurityMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.common.CommonMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
@@ -60,6 +67,18 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        # TODO: Enable TokenAuthentication alongside SessionAuthentication
+        #       so mobile clients use tokens while web pages keep using sessions
+    ],
+}
+
+# Local development CORS settings for Flutter Web (Chrome)
+# Make sure to limit this on production, e.g.,
+# load CORS_ALLOW_ALL_ORIGINS value from .env set on the deployment environment
+CORS_ALLOW_ALL_ORIGINS = True
 
 # gunakan https:// untuk trailing urlnya
 CSRF_TRUSTED_ORIGINS = ["https://clevraldo-limuel-myportofolio.pws.cs.ui.ac.id"]
