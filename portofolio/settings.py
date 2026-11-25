@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "corsheaders",
     "rest_framework",
+    "rest_framework.authtoken",
     # TODO: Add DRF's built-in authtoken app
     "main",
 ]
@@ -71,7 +72,9 @@ MIDDLEWARE = [
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
         # TODO: Enable TokenAuthentication alongside SessionAuthentication
-        #       so mobile clients use tokens while web pages keep using sessions
+        #       so mobile clients use tokens while web pages keep using sessions4
+        "rest_framework.authentication.TokenAuthentication",
+        "rest_framework.authentication.SessionAuthentication",
     ],
 }
 
